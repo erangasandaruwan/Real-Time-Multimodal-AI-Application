@@ -430,25 +430,8 @@ Tracing should capture each stage.
 
 Example trace:
 
-```text
-voice-request
- │
- ├── audio-receive
- │
- ├── asr-request
- │
- ├── asr-finalize
- │
- ├── llm-request
- │
- ├── llm-first-token
- │
- ├── tts-request
- │
- ├── tts-first-byte
- │
- └── audio-response
-```
+
+
 
 Recommended observability tools include:
 
@@ -493,16 +476,8 @@ Example strategies include:
 
 ### ASR Failure
 
-```text
-ASR unavailable
-        │
-        ▼
-Retry
-        │
-        ├── Success → Continue pipeline
-        │
-        └── Failure → Inform user
-```
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/d78f75d5-4420-4fe8-a48c-6b7dd8225701" />
+
 
 Possible response:
 
@@ -514,18 +489,8 @@ Possible response:
 
 ### LLM Timeout
 
-```text
-LLM Request
-   │
-   ▼
-Timeout
-   │
-   ├── Retry with same model
-   │
-   ├── Switch to fallback model
-   │
-   └── Return graceful response
-```
+<img width="1448" height="1086" alt="image" src="https://github.com/user-attachments/assets/4dfa922a-6c06-4b37-96f7-0a2a4a8c0506" />
+
 
 Possible fallback:
 
@@ -539,15 +504,8 @@ Possible fallback:
 
 If text generation succeeded but speech synthesis failed:
 
-```text
-LLM Response
-     │
-     ▼
-TTS Failure
-     │
-     ▼
-Return Text Response
-```
+<img width="1448" height="1086" alt="image" src="https://github.com/user-attachments/assets/4056cc58-208b-4002-9428-54446218caf5" />
+
 
 The user still receives useful information instead of a complete failure.
 
